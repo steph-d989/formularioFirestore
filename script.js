@@ -26,35 +26,20 @@ document.getElementById('create').addEventListener('click', () => {
     crearUsuario({
         nombre, email, mensaje, imagen
     })
-    
+
 
 })
-//Delete one
-document.getElementById('delete').addEventListener('click', () => {
-    deleteUser();
-  });
-
-const deleteUser = () => {
-const id = prompt('Introduce ID por borrar')
-db.collection('prueba1').doc(id).delete().then(()=>{
-    alert(`Documneto con ID ${id} Fue borrado`)
-    cuerpoTabla.innerHTML = ''
-    verTodo();
-})
-.catch(()=>console.log('Error borrando documento'))
+//crear usuario
+const crearUsuario = async(usuario) => {
+    db.collection('prueba1')
+        .add(usuario)
+        .then((docRef) => {
+            console.log('Documento con id:', docRef.id)
+        })
+        .catch((error) => console.error("Error adding document: ", error));
 }
-const verTodo = ()=>{
-    borrarBD();
 
-    bd.collection('prueba1')
-    .get()
-    .then((querySnapchot)=>{
-        querySnapchot.forEach((doc) => {
-            pintarBD(doc.data().nombre, doc.data().email, doc.data().mensaje, doc.data().imagen)
-        });
-    })
-}
-const validarForm = () => {
+const validarForm = async() => {
     nombre = formulario.name.value;
     email = formulario.mail.value;
     mensaje = formulario.mensaje.value;
@@ -67,16 +52,36 @@ const validarForm = () => {
     pintarBD(nombre, email, mensaje, imagen)
 }
 
-const borrarBD = () =>{
-    cuerpoTabla.innerHTML='';
-}
-const crearUsuario = (usuario) => {
-    db.collection('prueba1')
-        .add(usuario)
-        .then((docRef) => {
-            console.log('Documento con id:', docRef.id)
+const verTodo = async() => {
+    borrarBD();
+    bd.collection('prueba1')
+        .get()
+        .then((querySnapchot) => {
+            querySnapchot.forEach((doc) => {
+                pintarBD(doc.data().nombre, doc.data().email, doc.data().mensaje, doc.data().imagen)
+            });
         })
+        .catch((error)=>console.log(`no pinta datos`))
+}
 
+//Delete one
+document.getElementById('delete').addEventListener('click', () => {
+    deleteUser();
+});
+
+const deleteUser = async() => {
+    const id = prompt('Introduce ID por borrar')
+    db.collection('prueba1').doc(id).delete()
+        .then(() => {
+            alert(`Documneto con ID ${id} Fue borrado`)
+            cuerpoTabla.innerHTML = ''
+            verTodo();
+        })
+        .catch(() => console.log('Error borrando documento'))
+}
+
+const borrarBD = () => {
+    cuerpoTabla.innerHTML = '';
 }
 
 const pintarBD = async(nombre, email, mensaje, imagen) => {
@@ -88,15 +93,15 @@ const pintarBD = async(nombre, email, mensaje, imagen) => {
     let columna3 = document.createElement('TD');
     columna3.textContent = mensaje;
     let columna4 = document.createElement('TD');
-    columna4.innerHTML= `<img class=imagen src=${imagen}></img>`;
+    columna4.innerHTML = `<img class=imagen src=${imagen}></img>`;
     tablafila.append(columna1, columna2, columna3, columna4)
     console.log(tablafila)
     cuerpoTabla.append(tablafila);
 }
 
-function readOne(id) {
+async function readOne(id) {
     // Limpia el album para mostrar el resultado
-   borrarBD();
+    borrarBD();
     //Petición a Firestore para leer un documento de la colección album 
     var docRef = db.collection("prueba1").doc(id);
 
