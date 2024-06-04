@@ -1,0 +1,31 @@
+.imagen {
+    width: 250px;
+}
+#tabla {
+    border: 1px solid;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+}
+
+th {
+    background-color: black;
+    color: white;
+}
+
+tr:nth-of-type(even) {
+    background-color: lightgray;
+}
+
+tr:nth-of-type(odd) {
+    background-color: azure;
+}
+
+th,
+td {
+    border: 1px solid;
+    width: 25%;
+}
+#listaBD {
+    width: 100%;
+}

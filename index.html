@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <form action="#" id="formLogin">
+        <fieldset>
+            <label for="name">
+                <input type="text" id="name" class="name" placeholder="Ingresa tu nombre">
+            </label>
+            <label for="email">
+                <input type="text" id="mail" class="mail" placeholder="Ingresa tu e-mail">
+            </label>
+            <label for="mensaje">
+                <input type="textarea" id="mensaje" class="mensaje" placeholder="Deja tu mensaje aqui">
+            </label>
+            <label for="imagen">
+                <input type="text" id="imagen" class="imagen" , placeholder="Ingresa la URL de tu imagen">
+            </label>
+            <div id="botones">
+                <button id="create">Crear</button>
+                <button id="ver-todos">Ver todos</button>
+                <button id="ver-uno">Buscar por ID</button>
+                <button id="delete">Borrar</button>
+                <button id="clean">Limpiar</button>
+
+            </div>
+        </fieldset>
+        <div id="listaBD">
+            <table id="tabla">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>E-mail</th>
+                        <th>Mensaje</th>
+                        <th>Imagen</th>
+                    </tr>
+                </thead>
+                <tbody id="cuerpoTabla">
+
+                </tbody>
+            </table>
+        </div>
+
+    </form>
+
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
